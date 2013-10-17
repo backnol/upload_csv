@@ -1,6 +1,7 @@
 <%= form_tag statements_path, multipart: true do |f| %>
 
   <%= file_field_tag :file %>
+  <%= text_field_tag :words %>
 
   <%= submit_tag 'Save' %>
 

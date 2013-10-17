@@ -8,17 +8,22 @@ class StatementsController < ApplicationController
   end
 
   def create
-    Statement.where(id: 5).sum()
     puts "Received file"
     file = params[:file]
     puts "Processing file"
-    rows = []
+    @rows = []
     CSV.foreach(file.path, headers: true) do |row|
-      rows << row.to_hash
+      @rows << row.to_hash
     end
+    puts @rows.count
+    puts @rows
     sum = 0
-    rows.each do{ |row| sum += row[:number] }
+    @rows.each { |row| sum += row['number'].to_i }
     puts sum
+
+    puts 'Parsing the words that are split by comma'
+    @words = params[:words].split(',')
+    
     render 'test_view'
   end
 
